@@ -11,7 +11,7 @@ public class DaoBuffer implements CreateBuffer{
 	@Override
 	public StringBuffer createBuffer(String tableName, String fileName,String voName,String voAllName,String daoImplAllName, List ausd) {
 		StringBuffer buffer=new StringBuffer();
-		fileName=BaseUtil.getClassFolderPath(fileName);
+		fileName=daoImplAllName;
 		buffer.append("package "+fileName+";\r\n\n");
 		buffer.append("import org.springframework.stereotype.Repository;\r\n");
 		buffer.append("import com.newaim.core.jpa.BaseDao;\r\n");
