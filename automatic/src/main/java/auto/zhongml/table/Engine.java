@@ -1,16 +1,6 @@
 package auto.zhongml.table;
 
-import auto.zhongml.table.buffer.ControllerBuffer;
-import auto.zhongml.table.buffer.DaoBuffer;
-import auto.zhongml.table.buffer.DaoImplBuffer;
-import auto.zhongml.table.buffer.EditJspBuffer;
-import auto.zhongml.table.buffer.EntityBuffer;
-import auto.zhongml.table.buffer.ListJspBuffer;
-import auto.zhongml.table.buffer.MainJspBuffer;
-import auto.zhongml.table.buffer.MapperXmlBuffer;
-import auto.zhongml.table.buffer.ServiceBuffer;
-import auto.zhongml.table.buffer.ServiceImplBuffer;
-import auto.zhongml.table.buffer.SpringBuffer;
+import auto.zhongml.table.buffer.*;
 
 import java.util.List;
 
@@ -36,6 +26,18 @@ public class Engine extends BaseUtil{
 	public static void createEntityJava(String tableName,String fileName,String voName,String voAllName,String daoImplAllName) {
 		
 		EntityBuffer mapBuffer=new EntityBuffer();
+		StringBuffer buffer=mapBuffer.createBuffer(tableName, fileName,voName, voAllName, daoImplAllName,null);
+		createFile(fileName, buffer);
+
+	}
+
+	/**
+	 * 创建实体类文件
+	 * @param tableName
+	 */
+	public static void createEntityVoJava(String tableName,String fileName,String voName,String voAllName,String daoImplAllName) {
+
+		EntityVoBuffer mapBuffer=new EntityVoBuffer();
 		StringBuffer buffer=mapBuffer.createBuffer(tableName, fileName,voName, voAllName, daoImplAllName,null);
 		createFile(fileName, buffer);
 

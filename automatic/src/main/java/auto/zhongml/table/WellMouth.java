@@ -23,9 +23,9 @@ public class WellMouth {
     public static void main(String[] args) {
         System.out.println("开始生成。。。。");
         String rootPath = "E:/newaim/java/";
-        String tableName = "na_product_marks";
-        String entityName = "ProductMarks";
-        String model = "mark";
+        String tableName = "na_account_user_role";
+        String entityName = "Role";
+        String model = "admin.account";
         List ausd=new ArrayList<>();
         ausd.add("select");
         ausd.add("update");
@@ -45,24 +45,16 @@ public class WellMouth {
     public static void create(String rootPath, String tableName, String entityName, String model, List ausd) {
         System.out.println("开始生成。。。。");
 
-        String voAllName = "com.newaim.purchase.archives." + model + ".entity." + entityName;
-        String daoImplAllName = "com.newaim.purchase.archives." + model + ".dao.impl." + entityName + "DaoImpl";
+        String voAllName = "com.newaim.purchase." + model + ".entity." + entityName;
+        String daoImplAllName = "com.newaim.purchase." + model + ".dao.impl." + entityName + "DaoImpl";
 
-        String path = rootPath + "com.newaim\\purchase\\archives/" + model + "/";
-        //String pathJsp = rootPath + "web-ycs/WebContent/view/" + model + "/";
-        //String xmlpath = rootPath + "com.ycjf.ycs/src/META-INF/conf/";
+        String path = rootPath + "com.newaim.purchase/" + model + "/";
 
-      /*  //创建mybatis映射文件
-        Engine.createMapperXml(tableName, xmlpath + "mybatis/" + entityName.toLowerCase() + "-mapper.xml", entityName, voAllName, daoImplAllName);
-
-        //创建spring配置文件
-        Engine.createSpringXml("", xmlpath + "spring/yypt-" + entityName.toLowerCase() + "-service.xml", entityName, voAllName, daoImplAllName);
-*/
         //创建实体类
         Engine.createEntityJava(tableName, path + "entity/" + entityName + ".java", entityName, voAllName, daoImplAllName);
 
         //创建Vo类
-        Engine.createEntityJava(tableName, path + "vo/" + entityName + "Vo.java", entityName, voAllName, daoImplAllName);
+        Engine.createEntityVoJava(tableName, path + "vo/" + entityName + "Vo.java", entityName, voAllName, daoImplAllName);
 
         //创建Dao类
         Engine.createDaoJava("", path + "dao/" + entityName + "Dao.java", entityName, voAllName, daoImplAllName,ausd);
@@ -71,23 +63,14 @@ public class WellMouth {
         Engine.createDaoImplJava("", path + "dao/impl/" + entityName + "DaoImpl.java", entityName, voAllName, daoImplAllName,ausd);
 
         //创建service类
-       // Engine.createServiceJava("", path + "service/" + entityName + "Service.java", entityName, voAllName, daoImplAllName);
+        Engine.createServiceJava("", path + "service/" + entityName + "Service.java", entityName, voAllName, daoImplAllName,ausd);
 
         //创建service实现类
-        Engine.createServiceImplJava("", path + "service/impl/" + entityName + "ServiceImpl.java", entityName, voAllName, daoImplAllName,ausd);
+        //Engine.createServiceImplJava("", path + "service/impl/" + entityName + "ServiceImpl.java", entityName, voAllName, daoImplAllName,ausd);
 
         //创建控制器
         Engine.createControllerJava(tableName, path + "controllers/" + entityName + "Controller.java", entityName, voAllName, daoImplAllName,ausd);
-			
-		/*	//创建Listjsp列表
-		    Engine.createListJsp(tableName, pathJsp+"list-"+model+".jsp",entityName,voAllName,daoImplAllName);
-		
-		    //创建Editjsp列表
-		    Engine.createEditJsp(tableName, pathJsp+"edit-"+model+".jsp",entityName,voAllName,daoImplAllName);
-		    
-		    //创建Mainjsp列表
-		    Engine.createMainJsp(tableName, pathJsp+"main-"+model+".jsp",entityName,voAllName,daoImplAllName);
-			*/
+
         System.out.println("结束。。。。");
 
     }

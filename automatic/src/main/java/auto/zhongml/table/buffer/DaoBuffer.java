@@ -13,7 +13,9 @@ public class DaoBuffer implements CreateBuffer{
 		StringBuffer buffer=new StringBuffer();
 		fileName=BaseUtil.getClassFolderPath(fileName);
 		buffer.append("package "+fileName+";\r\n\n");
-		buffer.append("import java.util.List;\r\n");
+		buffer.append("import org.springframework.stereotype.Repository;\r\n");
+		buffer.append("import com.newaim.core.jpa.BaseDao;\r\n");
+		buffer.append("import com.newaim.purchase.admin.account.entity.Role;\r\n");
 		buffer.append("import "+voAllName+"; \r\n");
 		buffer.append(" @Repository \r\n");
 		buffer.append(" public interface "+voName+"Dao extends BaseDao<"+voName+", String>{ \r\n");

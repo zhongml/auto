@@ -15,39 +15,26 @@ public class ControllerBuffer extends BaseUtil implements CreateBuffer {
         String modelPath = "";
         String folderPathOfDaoImpl = BaseUtil.getFolderPath(daoImplAllName);
         modelPath = folderPathOfDaoImpl.substring(0, folderPathOfDaoImpl.length() - 4);
-        String controllerPath = modelPath.replace("dao.", "web.controller");
+        String controllerPath = modelPath.replace("dao.", "controllers");
         String servicePath = modelPath.replace("dao", "service");
         buffer.append("package " + controllerPath + ";\r\n\n");
-        buffer.append(" import java.util.ArrayList; \r\n");
-        buffer.append(" import java.util.List; \r\n");
-        buffer.append(" import net.sf.json.JSONObject; \r\n");
-        buffer.append(" import java.util.Map; \r\n");
-        buffer.append(" import java.util.HashMap; \r\n");
+        buffer.append("import com.google.common.collect.Maps;\r\n");
+        buffer.append("import com.newaim.core.contoller.ControllerBase;\r\n");
+        buffer.append("import com.newaim.core.utils.RestResult;\r\n");
+        buffer.append("import com.newaim.core.utils.ServletUtils;\r\n");
+        buffer.append("import com.newaim.purchase.admin.account.entity.Role;\r\n");
+        buffer.append("import com.newaim.purchase.admin.account.service.RoleService;\r\n");
+        buffer.append("import com.newaim.purchase.admin.account.vo.RoleVo;\r\n");
+        buffer.append("import org.apache.commons.lang3.StringUtils;\r\n");
+        buffer.append("import org.apache.shiro.authz.annotation.Logical;\r\n");
+        buffer.append("import org.apache.shiro.authz.annotation.RequiresPermissions;\r\n");
+        buffer.append("import org.springframework.beans.factory.annotation.Autowired;\r\n");
+        buffer.append("import org.springframework.data.domain.Page;\r\n");
+        buffer.append("import org.springframework.web.bind.annotation.*;\r\n");
 
-        buffer.append(" import javax.annotation.Resource; \r\n");
-        buffer.append(" import javax.servlet.http.HttpServletRequest; \r\n");
-        buffer.append(" import javax.servlet.http.HttpServletResponse; \r\n");
-
-        buffer.append(" import org.slf4j.Logger; \r\n");
-        buffer.append(" import org.slf4j.LoggerFactory; \r\n");
-        buffer.append(" import org.springframework.stereotype.Controller; \r\n");
-        buffer.append(" import org.springframework.web.bind.annotation.RequestMapping; \r\n");
-        buffer.append(" import org.springframework.web.bind.annotation.RequestParam; \r\n");
-        buffer.append(" import org.springframework.web.bind.annotation.ResponseBody; \r\n");
-
-        buffer.append(" import com.foresee.fbrp.util.StringUtil; \r\n");
-        buffer.append(" import com.foresee.fbrp.infrastructure.util.PagedResult; \r\n");
-        buffer.append(" import com.foresee.portal.query.xmlbeans.QueryParamDocument; \r\n");
-        buffer.append(" import com.foresee.portal.query.xmlbeans.QueryParamDocument.QueryParam.SearchParam.SearchField; \r\n");
-        buffer.append(" import com.foresee.portal.query.xmlbeans.QueryResultDocument; \r\n");
-        buffer.append(" import com.foresee.portal.query.xmlbeans.QueryResultDocument.QueryResult; \r\n");
-        buffer.append(" import com.foresee.portal.query.xmlbeans.QueryResultDocument.QueryResult.Data; \r\n");
-        buffer.append(" import com.foresee.portal.query.xmlbeans.QueryResultDocument.QueryResult.Data.Row; \r\n");
-        buffer.append(" import com.foresee.portal.query.xmlbeans.QueryResultDocument.QueryResult.Data.Row.Column; \r\n");
-        buffer.append(" import com.foresee.portal.query.xmlbeans.QueryResultDocument.QueryResult.Pager; \r\n");
-        buffer.append(" import com.ycjf.ycs.util.DateUtil; \r\n");
-        buffer.append(" import com.ycjf.ycs.workflow.web.controller.AbstractWorkFlowController; \r\n");
-        buffer.append(" import java.util.Date; \r\n");
+        buffer.append("import javax.servlet.ServletRequest;\r\n");
+        buffer.append("import java.util.Date;\r\n");
+        buffer.append("import java.util.LinkedHashMap;\r\n");
         buffer.append(" import " + voAllName + "; \r\n");
         buffer.append(" import " + servicePath + voName + "Service; \r\n");
 
